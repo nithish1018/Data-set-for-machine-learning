@@ -2,7 +2,6 @@ import pandas as pd
 import matplotlib.pyplot as pt
 import seaborn as sb
 from sklearn import model_selection
-from sklearn.model_selection import train_test_split as sklearn_train_test_split
 from sklearn.metrics import confusion_matrix
 from sklearn.neighbors import KNeighborsClassifier
 #Data Visualization
@@ -22,7 +21,7 @@ pt.show()
 #Experiance
 x = df.drop(["target"], axis = "columns")
 y = df["target"]
-xtrain,xtest,ytrain,ytest = sklearn_train_test_split(x,ytest_size = 0.2, random_state = 1)
+xtrain,xtest,ytrain,ytest = model_selection.train_test_split(x,y, random_state = 1)
 print(xtrain)
 print(ytrain)
 knn = KNeighborsClassifier(n_neighbors = 5)
@@ -32,7 +31,7 @@ ypredict = knn.predict(xtest)
 cm = confusion_matrix(ytest,ypredict)
 print("confusion matrix = ",cm)
 pt.figure(figsize = (10,5))
-sb.heatmap(cm, annot = true)
+sb.heatmap(cm, annot = True)
 pt.xlabel("Predicted Value")
 pt.ylabel("Actual value from Dataset")
 pt.show()
